@@ -33,9 +33,9 @@ public class Partida {
     private void jogarMao() {
         distribuirCartas();
 
-        int valorMao = 2;         // Truco Mineiro: each hand starts at 2 points
+        int valorMao = 3;         // Truco Mineiro: each hand starts at 2 points
         int[] vitorias = {0, 0}; // [team1 wins, team2 wins] across tricks
-        int vencedorRound1 = -1; // winner of the 1st trick: -1=unknown, 0=tie, 1=team1, 2=team2
+        int vencedorRound1 = -1; 
 
         System.out.println("\n==================== NEW HAND ====================");
         System.out.println("Score: You " + scoreDupla + " pts  |  Opponents: " + scoreInimigo + " pts");
@@ -54,7 +54,7 @@ public class Partida {
             status.cartaJogadaParceiro = null;
             status.vezAtual = vez;
 
-            // Human plays (pressing T calls Truco before playing a real card)
+            // Jogador (Pedir Truco)
             Carta jogadaHumano = jogadorHumano.jogarCarta(status);
             while (jogadaHumano.getNome().equals("TRUCO")) {
                 int novoValor = proximoValorTruco(valorMao);
