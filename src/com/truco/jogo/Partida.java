@@ -1,5 +1,6 @@
 package com.truco.jogo;
 
+import com.truco.crud.HistoricoPartidas;
 import com.truco.modelo.*;
 import java.util.List;
 
@@ -179,5 +180,18 @@ public class Partida {
         }
         System.out.println("Final Score: You " + scoreDupla + " pts  |  Opponents: " + scoreInimigo + " pts");
         System.out.println("==================================================\n");
+
+        // Auto-save match result to database
+        if (jogadorHumano.getId() > 0) {
+            String resultado;
+            if (scoreDupla >= 12) {
+                resultado = "VITORIA";
+            } else if (scoreInimigo >= 12) {
+                resultado = "DERROTA";
+            } else {
+                resultado = "EMPATE";
+            }
+            HistoricoPartidas.salvarResultado(jogadorHumano.getId(), resultado, scoreDupla, scoreInimigo);
+        }
     }
 }

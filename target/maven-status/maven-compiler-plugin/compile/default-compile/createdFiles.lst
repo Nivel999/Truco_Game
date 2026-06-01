@@ -1,0 +1,11 @@
+com\truco\modelo\Jogador.class
+com\truco\jogo\Partida.class
+com\truco\crud\GerenciadorUsuarios.class
+com\truco\modelo\Bot.class
+com\truco\Main.class
+com\truco\modelo\Carta.class
+com\truco\modelo\Humano.class
+com\truco\crud\HistoricoPartidas.class
+com\truco\modelo\PartidaStatus.class
+com\truco\crud\ConexaoBanco.class
+com\truco\modelo\Baralho.class

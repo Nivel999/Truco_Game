@@ -1,10 +1,15 @@
 package com.truco;
+
+import com.truco.crud.ConexaoBanco;
 import com.truco.crud.GerenciadorUsuarios;
+import com.truco.crud.HistoricoPartidas;
 import com.truco.jogo.Partida;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        ConexaoBanco.inicializarBanco();
+
         Scanner sc = new Scanner(System.in);
         GerenciadorUsuarios crud = new GerenciadorUsuarios();
         
@@ -15,7 +20,8 @@ public class Main {
             System.out.println("3. Atualizar Jogador");
             System.out.println("4. Remover Jogador");
             System.out.println("5. JOGAR TRUCO");
-            System.out.println("6. Sair");
+            System.out.println("6. Histórico de Partidas");
+            System.out.println("7. Sair");
             System.out.print("Escolha: ");
             
             String opcao = sc.nextLine();
@@ -29,20 +35,23 @@ public class Main {
                     crud.listarUsuarios();
                     break;
                 case "3":
-                    System.out.print("Digite o número do jogador na lista (1, 2...): ");
-                    int idxAlt = Integer.parseInt(sc.nextLine()) - 1;
+                    crud.listarUsuarios();
+                    System.out.print("Digite o ID do jogador: ");
+                    int idAlt = Integer.parseInt(sc.nextLine());
                     System.out.print("Novo nome: ");
-                    crud.atualizarUsuario(idxAlt, sc.nextLine());
+                    crud.atualizarUsuario(idAlt, sc.nextLine());
                     break;
                 case "4":
-                    System.out.print("Digite o número do jogador para remover: ");
-                    int idxRem = Integer.parseInt(sc.nextLine()) - 1;
-                    crud.removerUsuario(idxRem);
+                    crud.listarUsuarios();
+                    System.out.print("Digite o ID do jogador para remover: ");
+                    int idRem = Integer.parseInt(sc.nextLine());
+                    crud.removerUsuario(idRem);
                     break;
                 case "5":
-                    System.out.print("Selecione o jogador (1, 2...): ");
-                    int idxJoga = Integer.parseInt(sc.nextLine()) - 1;
-                    var jogador = crud.selecionarUsuario(idxJoga);
+                    crud.listarUsuarios();
+                    System.out.print("Selecione o ID do jogador: ");
+                    int idJoga = Integer.parseInt(sc.nextLine());
+                    var jogador = crud.selecionarUsuario(idJoga);
                     if (jogador != null) {
                         Partida partida = new Partida(jogador);
                         partida.iniciar();
@@ -51,6 +60,15 @@ public class Main {
                     }
                     break;
                 case "6":
+                    crud.listarUsuarios();
+                    System.out.print("Digite o ID do jogador: ");
+                    int idHist = Integer.parseInt(sc.nextLine());
+                    System.out.println("\n--- Match History ---");
+                    HistoricoPartidas.exibirHistorico(idHist);
+                    System.out.println("\n--- Summary ---");
+                    HistoricoPartidas.exibirResumo(idHist);
+                    break;
+                case "7":
                     System.out.println("Saindo...");
                     sc.close();
                     System.exit(0);

@@ -3,10 +3,14 @@ import java.util.Scanner;
 
 public class Humano extends Jogador {
     private static final Scanner sc = new Scanner(System.in);
+    private int id;
 
     public Humano(String nome, int idEquipe) {
         super(nome, idEquipe);
     }
+
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
 
     @Override
     public Carta jogarCarta(PartidaStatus status) {
